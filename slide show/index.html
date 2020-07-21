@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>スライドショー</title>
+    <link href="_common/images/favicon.ico" rel="shortcut icon" />
+    <link
+      href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,500"
+      rel="stylesheet"
+    />
+    <link href="_common/css/style.css" rel="stylesheet" />
+
+    <style>
+      .slide {
+        margin: 0 auto;
+        border: 1px solid black;
+        width: 720px;
+        background-color: black;
+      }
+      img {
+        max-width: 100%;
+      }
+      .toolbar {
+        overflow: hidden;
+        text-align: center;
+      }
+      .nav {
+        display: inline-block;
+      }
+      #prev {
+        float: left;
+        width: 40px;
+        height: 40px;
+        background: url(images/prev.png) no-repeat;
+        cursor: pointer;
+      }
+      #next {
+        float: left;
+        width: 40px;
+        height: 40px;
+        background: url(images/next.png) no-repeat;
+        cursor: pointer;
+      }
+      #page {
+        display: inline;
+        float: left;
+        margin-top: 8px;
+        height: 32px;
+        color: white;
+      }
+      #start {
+        float: left;
+        width: 40px;
+        height: 40px;
+        margin-left: 10px;
+        background: gray;
+        color: white;
+        cursor: pointer;
+      }
+      #stop {
+        float: left;
+        width: 40px;
+        height: 40px;
+        margin-left: 10px;
+        background: gray;
+        color: white;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>スライドショー</h1>
+        <h2>ボタンクリックで画像を切り替える</h2>
+      </div>
+      <!-- /.container -->
+    </header>
+    <main>
+      <div class="container">
+        <section>
+          <div class="slide">
+            <div class="image_box">
+              <!--ボタンをクリックすると切り替わるメインの画像-->
+              <img id="main_image" src="images/image1.jpg" />
+            </div>
+            <!--操作するためのツールバー-->
+            <div class="toolbar">
+              <div class="nav">
+                <!--『前へ』ボタン-->
+                <div id="prev"></div>
+                <!--ページ数-->
+                <div id="page"></div>
+                <!--『次へ』ボタン-->
+                <div id="next"></div>
+                <!-- スタートボタン -->
+                <button id="start">start</button>
+                <!-- ストップボタン -->
+                <button id="stop">stop</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- /.container -->
+    </main>
+    <footer>
+      <div class="container">
+        <p>JavaScript Samples</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+    <script>
+      "use strict";
+
+      const images = [
+        "images/image1.jpg",
+        "images/image2.jpg",
+        "images/image3.jpg",
+        "images/image4.jpg",
+        "images/image5.jpg"
+      ];
+      let current = 0;
+      let intervalID;
+      let isStartTimer = false;
+
+      function changeImage(num) {
+        if (current + num >= 0 && current + num < images.length) {
+          current += num;
+          document.getElementById("main_image").src = images[current];
+          pageNum();
+        }
+      }
+
+      function setTimer() {
+        if (current === images.length - 1) {
+          current = 0;
+        } else {
+          current++;
+        }
+        document.getElementById("main_image").src = images[current];
+        pageNum();
+      }
+
+      function startSlideshow() {
+
+        if (isStartTimer) {
+          return;
+        }else {
+          intervalID = setInterval(setTimer, 1000);
+          isStartTimer = !isStartTimer
+        }
+
+        
+      }
+
+      function stopSlideshow() {
+        if(isStartTimer){
+          //setTimeout(intervalID);
+          clearInterval(intervalID);
+          isStartTimer = !isStartTimer
+        }
+        
+      }
+
+      function pageNum() {
+        document.getElementById("page").textContent =
+          current + 1 + "/" + images.length;
+      }
+
+      pageNum();
+
+      document.getElementById("prev").onclick = function() {
+        changeImage(-1);
+      };
+
+      document.getElementById("next").onclick = function() {
+        changeImage(1);
+      };
+
+      document.getElementById("start").onclick = function() {
+        startSlideshow();
+      };
+
+      document.getElementById("stop").onclick = function() {
+        stopSlideshow();
+      };
+    </script>
+  </body>
+</html>
