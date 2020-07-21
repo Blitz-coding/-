@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>天気予報</title>
+    <link href="_common/images/favicon.ico" rel="shortcut icon" />
+    <link
+      href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,500"
+      rel="stylesheet"
+    />
+    <link href="_common/css/style.css" rel="stylesheet" />
+    <link href="css/special.css" rel="stylesheet" />
+    <script src="_common/scripts/jquery-3.4.1.min.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Wed APIを使ってみよう</h1>
+        <h2>天気予報</h2>
+      </div>
+      <!-- /.container -->
+    </header>
+    <main>
+      <div id="map"></div>
+      <ul>
+        <li>lat: <span id="lat"></span></li>
+        <li>lng: <span id="lng"></span></li>
+      </ul>
+      <div class="container">
+        <section>
+          <h3 id="place"></h3>
+          <div id="now">
+            <div id="weather"></div>
+          </div>
+          <table id="forecast"></table>
+        </section>
+      </div>
+      <!-- /.container -->
+    </main>
+    <footer>
+      <div class="container">
+        <p>JavaScript Samples</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=key&callback=initMap"
+      async
+      defer
+    ></script>
+  </body>
+</html>
